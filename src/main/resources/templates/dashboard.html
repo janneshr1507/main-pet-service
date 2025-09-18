@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dashboard - Pet Care</title>
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+
+<!-- User info (top right corner) -->
+<div class="user-info">
+    Hello, <span th:text="${ownerName}">User</span>
+</div>
+
+<div class="container">
+    <h1>Pet Dashboard</h1>
+
+    <div class="button-group">
+        <button class="button" onclick="window.location.href='/add-pet'">Add Pet</button>
+        <button class="button" onclick="window.location.href='/grooming-form'">Grooming</button>
+        <button class="button" onclick="window.location.href='/supplements'">Supplements</button>
+        <button class="button" onclick="window.location.href='/bookAppointment'">Book Doctor Appointment</button>
+    </div>
+
+    <h2>Your Pets</h2>
+    <table class="pet-table">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Breed</th>
+            <th>Age</th>
+            <th>Gender</th>
+            <th>Weight</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="pet : ${pets}">
+            <td th:text="${pet.name}">Pet Name</td>
+            <td th:text="${pet.breed}">Breed</td>
+            <td th:text="${pet.age}">Age</td>
+            <td th:text="${pet.gender}">Gender</td>
+            <td th:text="${pet.weight}">Weight</td>
+            <td>
+                <button class="action-button"
+                        th:onclick="'window.location.href=\'/editPet/' + ${pet.id} + '\';'">
+                    Edit
+                </button>
+                <button class="action-button delete"
+                        th:onclick="'window.location.href=\'/deletePet/' + ${pet.id} + '\';'">
+                    Delete
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

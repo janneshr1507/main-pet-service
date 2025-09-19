@@ -16,4 +16,6 @@ public class Supplements {
     private Long id;
     private String petName;
     private List<String> selectedSupplements;
+    private String quantity;
+    private String date;
 }

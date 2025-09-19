@@ -1,0 +1,97 @@
+/* ==========================
+   Base Layout
+========================== */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: #fff;
+    min-height: 100vh;
+    padding: 40px;
+    box-sizing: border-box;
+}
+
+/* ==========================
+   Container
+========================== */
+.container {
+    max-width: 1000px;
+    margin: 60px auto 0;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
+}
+
+/* ==========================
+   Headings
+========================== */
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2rem;
+}
+
+/* ==========================
+   User Info (Top Right)
+========================== */
+.user-info {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* ==========================
+   Orders Table
+========================== */
+.orders-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.orders-table th,
+.orders-table td {
+    padding: 12px 16px;
+    text-align: left;
+    font-size: 1rem;
+    border-bottom: 1px solid #ccc;
+}
+
+.orders-table th {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.orders-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* ==========================
+   Back Button
+========================== */
+.back-button {
+    display: inline-block;
+    margin-top: 30px;
+    background-color: #fff;
+    color: #764ba2;
+    padding: 12px 20px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.back-button:hover {
+    background-color: #764ba2;
+    color: #fff;
+}

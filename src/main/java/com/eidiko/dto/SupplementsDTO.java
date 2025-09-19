@@ -9,4 +9,6 @@ import java.util.List;
 public class SupplementsDTO {
     private String petName;
     private List<String> selectedSupplements;
+    private String quantity;
+    private String date;
 }

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Supplement Orders - Pet Care</title>
+    <link rel="stylesheet" href="css/orders.css" />
+</head>
+<body>
+
+<!-- Top Right: User Info -->
+<div class="user-info">
+    Hello, <span th:text="${ownerName}">User</span>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <h1>Ordered Supplements</h1>
+
+    <div class="button-group">
+        <a href="/dashboardView" class="button">Back to Dashboard</a>
+    </div>
+
+    <table class="pet-table">
+        <thead>
+        <tr>
+            <th>Pet Name</th>
+            <th>Supplement Name</th>
+            <th>Quantity</th>
+            <th>Date Ordered</th>
+            <!-- <th>Instructions</th> -->
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="supplement : ${supplementsList}">
+            <td th:text="${supplement.petName}">Pet Name</td>
+            <td th:text="${supplement.selectedSupplements}">Supplement Name</td>
+            <td th:text="${supplement.quantity}">Quantity</td>
+            <td th:text="${supplement.date}">Date Ordered</td>
+            <!-- <td th:text="${supplement.instructions}">Instructions</td> -->
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>

@@ -75,4 +75,12 @@ public class DashboardController {
         supplementsService.bookSupplementsForPet(supplementsDTO);
         return "redirect:/dashboardView";
     }
+
+    @GetMapping("/orders-form")
+    public String ordersForm(Model model, HttpSession session) {
+        String ownerName = (String) session.getAttribute("ownerName");
+        model.addAttribute("ownerName", ownerName);
+        model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements());
+        return "orders";
+    }
 }

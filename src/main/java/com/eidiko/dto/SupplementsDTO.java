@@ -6,10 +6,7 @@ import lombok.Setter;
 import java.util.List;
 
 @Getter @Setter
-public class GroomingDTO {
+public class SupplementsDTO {
     private String petName;
-    private List<String> services;
-    private String date;
-    private String time;
-    private String status;
+    private List<String> selectedSupplements;
 }

@@ -27,15 +27,19 @@
 
 
         <div class="form-group">
-            <label for="service">Service Type</label>
-            <select id="service" th:field="*{service}" required>
-                <option value="">Select a Service</option>
-                <option value="Bathing">Bathing</option>
-                <option value="Haircut">Haircut</option>
-                <option value="Nail Trimming">Nail Trimming</option>
-                <option value="Full Grooming">Full Grooming</option>
-            </select>
+            <label>Service Type</label>
+            <div class="checkbox-group two-columns">
+                <div class="column">
+                    <label><input type="checkbox" th:field="*{services}" value="Bathing" /> Bathing</label>
+                    <label><input type="checkbox" th:field="*{services}" value="Haircut" /> Haircut</label>
+                </div>
+                <div class="column">
+                    <label><input type="checkbox" th:field="*{services}" value="Nail Trimming" /> Nail Trimming</label>
+                    <label><input type="checkbox" th:field="*{services}" value="Full Grooming" /> Full Grooming</label>
+                </div>
+            </div>
         </div>
+
 
         <div class="form-group">
             <label for="date">Preferred Date</label>

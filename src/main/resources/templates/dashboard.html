@@ -19,7 +19,7 @@
     <div class="button-group">
         <button class="button" onclick="window.location.href='/add-pet'">Add Pet</button>
         <button class="button" onclick="window.location.href='/grooming-form'">Grooming</button>
-        <button class="button" onclick="window.location.href='/supplements'">Supplements</button>
+        <button class="button" onclick="window.location.href='/supplements-form'">Supplements</button>
         <button class="button" onclick="window.location.href='/bookAppointment'">Book Doctor Appointment</button>
     </div>
 
@@ -51,6 +51,32 @@
                         th:onclick="'window.location.href=\'/deletePet/' + ${pet.id} + '\';'">
                     Delete
                 </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>Upcoming Grooming Appointments</h2>
+    <table class="grooming-table">
+        <thead>
+        <tr>
+            <th>Pet Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Grooming Type</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="schedule : ${groomingSchedules}">
+            <td th:text="${schedule.petName}">Pet Name</td>
+            <td th:text="${schedule.date}">Date</td>
+            <td th:text="${schedule.time}">Time</td>
+            <td th:text="${#strings.listJoin(schedule.services, ', ')}">Type</td>
+            <td>
+            <span th:text="${schedule.status}"
+                  th:classappend="${schedule.status.toLowerCase() == 'pending'} ? 'status-badge pending' : 'status-badge'">
+                Status
+            </span>
             </td>
         </tr>
         </tbody>

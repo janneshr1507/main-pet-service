@@ -1,7 +1,9 @@
 package com.eidiko.controller;
 
+import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.LoginDTO;
 import com.eidiko.entity.Pet;
+import com.eidiko.service.GroomingService;
 import com.eidiko.service.PetService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class LoginController {
     private final PetService petService;
+    private final GroomingService groomingService;
 
     @GetMapping("/login-form")
     public String loginPage(Model model) {
@@ -31,6 +34,8 @@ public class LoginController {
             session.setAttribute("ownerName", "Jannesh Rao");
             List<Pet> pets = petService.getAllPets();
             model.addAttribute("pets", pets);
+            List<GroomingDTO> groomingSchedules = groomingService.getAllGroomingSchedules();
+            model.addAttribute("groomingSchedules", groomingSchedules);
             return "/dashboard";
         } else {
             return "redirect:/login-form";

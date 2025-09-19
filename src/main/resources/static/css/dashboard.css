@@ -1,12 +1,13 @@
-/* dashboard.css */
-
+/* ==========================
+   Base Layout & Typography
+========================== */
 body {
     margin: 0;
+    padding: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: #fff;
     min-height: 100vh;
-    padding: 40px;
     box-sizing: border-box;
     position: relative;
 }
@@ -16,86 +17,215 @@ body {
     padding: 30px;
     border-radius: 12px;
     max-width: 1000px;
-    margin: 60px auto 0 auto;
+    margin: 60px auto 0;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.3);
 }
 
 h1, h2 {
     text-align: center;
+    margin-bottom: 20px;
 }
 
+/* ==========================
+   Buttons
+========================== */
 .button-group {
     text-align: center;
     margin: 20px 0 30px;
 }
 
 .button {
-    background: #fff;
+    background-color: #fff;
     color: #764ba2;
     border: none;
     padding: 12px 20px;
     font-size: 1rem;
-    border-radius: 6px;
-    cursor: pointer;
     font-weight: 600;
+    border-radius: 6px;
     margin: 10px;
-    transition: background 0.3s ease, color 0.3s ease;
+    cursor: pointer;
+    transition: all 0.3s ease;
 }
 
 .button:hover {
-    background: #764ba2;
+    background-color: #764ba2;
     color: #fff;
 }
 
-.pet-table {
-    width: 100%;
-    border-collapse: collapse;
-    background-color: #fff;
-    color: #333;
-    border-radius: 8px;
-    overflow: hidden;
+.button.cancel {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
 }
 
-.pet-table th, .pet-table td {
-    padding: 12px 16px;
-    text-align: left;
-    border-bottom: 1px solid #ccc;
+.button.cancel:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
 }
 
-.pet-table th {
-    background-color: #f5f5f5;
-}
-
+/* Action buttons inside tables */
 .action-button {
     padding: 6px 12px;
+    font-weight: bold;
     border: none;
     border-radius: 4px;
-    font-weight: bold;
-    cursor: pointer;
-    margin-right: 6px;
     background-color: #667eea;
-    color: white;
+    color: #fff;
+    cursor: pointer;
     transition: background-color 0.3s;
-}
-
-.action-button.delete {
-    background-color: #e74c3c;
+    margin-right: 6px;
 }
 
 .action-button:hover {
     opacity: 0.9;
 }
 
-/* Top-right user info */
+.action-button.delete {
+    background-color: #e74c3c;
+}
+
+/* ==========================
+   User Info (Top-Right)
+========================== */
 .user-info {
     position: absolute;
     top: 20px;
     right: 30px;
-    background-color: rgba(255, 255, 255, 0.1);
     padding: 8px 14px;
     border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.1);
     color: #fff;
     font-size: 0.95rem;
     font-weight: 500;
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+}
+
+/* ==========================
+   Tables (Pet / Grooming)
+========================== */
+.pet-table,
+.grooming-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    margin-top: 30px;
+}
+
+.pet-table th, .pet-table td,
+.grooming-table th, .grooming-table td {
+    padding: 12px 16px;
+    font-size: 1rem;
+    text-align: left;
+    border-bottom: 1px solid #ccc;
+}
+
+.pet-table th,
+.grooming-table th {
+    background-color: #f5f5f5;
+}
+
+.pet-table tbody tr:nth-child(even),
+.grooming-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* ==========================
+   Status Badges
+========================== */
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border-radius: 12px;
+    text-transform: capitalize;
+    background-color: #999;
+    color: #fff;
+}
+
+.status-badge.pending {
+    background-color: #f1c40f;
+    color: #333;
+}
+
+.status-badge.completed {
+    background-color: #2ecc71;
+}
+
+.status-badge.cancelled {
+    background-color: #e74c3c;
+}
+
+/* ==========================
+   Form Elements
+========================== */
+.form-group {
+    max-width: 500px;
+    margin: 0 auto 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group label {
+    font-weight: bold;
+    margin-bottom: 8px;
+    font-size: 1.1rem;
+}
+
+.form-group select,
+.form-group input[type="date"],
+.form-group input[type="time"] {
+    padding: 10px 14px;
+    font-size: 1.05rem;
+    border-radius: 6px;
+    border: none;
+    outline: none;
+}
+
+/* ==========================
+   Checkbox Groups (Shared)
+========================== */
+.checkbox-group,
+.supplements-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+    font-size: 1.1rem;
+}
+
+.checkbox-group label,
+.supplements-group label {
+    font-weight: 600;
+    cursor: pointer;
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-group input[type="checkbox"],
+.supplements-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+    vertical-align: middle;
+}
+
+/* Two-column layout for checkboxes */
+.checkbox-group.two-columns {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.checkbox-group.two-columns .column {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
 }

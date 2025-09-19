@@ -27,17 +27,21 @@ h1 {
     font-size: 2rem;
 }
 
+/* Form Structure */
 .form-group {
     margin-bottom: 20px;
+    display: flex;
+    flex-direction: column;
 }
 
 label {
-    display: block;
-    margin-bottom: 6px;
     font-weight: bold;
+    margin-bottom: 6px;
 }
 
-input,
+input[type="text"],
+input[type="date"],
+input[type="time"],
 select {
     width: 100%;
     padding: 10px;
@@ -47,6 +51,31 @@ select {
     box-sizing: border-box;
 }
 
+/* Checkbox Group Styling */
+.checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 10px;
+}
+
+.checkbox-group label {
+    display: flex;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    user-select: none;
+}
+
+.checkbox-group input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+/* Button Group */
 .button-group {
     display: flex;
     justify-content: space-between;
@@ -71,17 +100,19 @@ select {
     color: #fff;
 }
 
-.cancel {
+.button.cancel {
     background-color: transparent;
     border: 2px solid #fff;
     color: #fff;
 }
 
-.cancel:hover {
-    background-color: #fff;
-    color: #764ba2;
+.button.cancel:hover {
+    background-color: #e74c3c;
+    border-color: #e74c3c;
+    color: #fff;
 }
 
+/* User Info (Top-Right) */
 .user-info {
     position: absolute;
     top: 20px;

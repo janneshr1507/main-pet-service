@@ -7,13 +7,19 @@
     <link rel="stylesheet" href="css/grooming.css" />
 </head>
 <body>
+
+<!-- User Info (Top Right) -->
 <div class="user-info">
     Hello, <span th:text="${ownerName}">User</span>
 </div>
+
+<!-- Main Form Container -->
 <div class="container">
     <h1>Schedule Grooming</h1>
 
     <form th:action="@{/schedule-grooming}" th:object="${grooming}" method="post">
+
+        <!-- Pet Name Dropdown -->
         <div class="form-group">
             <label for="petName">Pet Name</label>
             <select id="petName" th:field="*{petName}" required>
@@ -25,37 +31,53 @@
             </select>
         </div>
 
-
+        <!-- Service Type Checkboxes -->
         <div class="form-group">
             <label>Service Type</label>
             <div class="checkbox-group two-columns">
                 <div class="column">
-                    <label><input type="checkbox" th:field="*{services}" value="Bathing" /> Bathing</label>
-                    <label><input type="checkbox" th:field="*{services}" value="Haircut" /> Haircut</label>
+                    <label>
+                        <input type="checkbox" th:field="*{services}" value="Bathing" />
+                        Bathing
+                    </label>
+                    <label>
+                        <input type="checkbox" th:field="*{services}" value="Haircut" />
+                        Haircut
+                    </label>
                 </div>
                 <div class="column">
-                    <label><input type="checkbox" th:field="*{services}" value="Nail Trimming" /> Nail Trimming</label>
-                    <label><input type="checkbox" th:field="*{services}" value="Full Grooming" /> Full Grooming</label>
+                    <label>
+                        <input type="checkbox" th:field="*{services}" value="Nail Trimming" />
+                        Nail Trimming
+                    </label>
+                    <label>
+                        <input type="checkbox" th:field="*{services}" value="Full Grooming" />
+                        Full Grooming
+                    </label>
                 </div>
             </div>
         </div>
 
-
+        <!-- Date -->
         <div class="form-group">
             <label for="date">Preferred Date</label>
             <input type="date" id="date" th:field="*{date}" required />
         </div>
 
+        <!-- Time -->
         <div class="form-group">
             <label for="time">Preferred Time</label>
             <input type="time" id="time" th:field="*{time}" required />
         </div>
 
+        <!-- Submit & Cancel Buttons -->
         <div class="button-group">
             <button type="submit" class="button">Schedule</button>
             <a href="/dashboardView" class="button cancel">Cancel</a>
         </div>
+
     </form>
 </div>
+
 </body>
 </html>

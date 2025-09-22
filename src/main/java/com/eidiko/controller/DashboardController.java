@@ -1,14 +1,15 @@
 package com.eidiko.controller;
 
+import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.PetDTO;
 import com.eidiko.dto.SupplementsDTO;
-import com.eidiko.entity.Pet;
 import com.eidiko.service.GroomingService;
 import com.eidiko.service.PetService;
 import com.eidiko.service.SupplementsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,18 +24,16 @@ public class DashboardController {
     private final SupplementsService supplementsService;
 
     @GetMapping("/dashboardView")
-    public String dashboardView(HttpSession session, Model model) {
+    public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("pets", petService.getAllPets());
-        String ownerName = (String) session.getAttribute("ownerName");
-        model.addAttribute("ownerName", ownerName);
+        model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("groomingSchedules", groomingService.getAllGroomingSchedules());
         return "dashboard";
     }
 
     @GetMapping("/add-pet")
-    public String addPetForm(HttpSession session, Model model) {
-        String ownerName = (String) session.getAttribute("ownerName");
-        model.addAttribute("ownerName", ownerName);
+    public String addPetForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("pet", new PetDTO());
         return "addPet";
     }
@@ -46,9 +45,8 @@ public class DashboardController {
     }
 
     @GetMapping("/grooming-form")
-    public String grommingForm(HttpSession session, Model model) {
-        String ownerName = (String) session.getAttribute("ownerName");
-        model.addAttribute("ownerName", ownerName);
+    public String grommingForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("grooming", new GroomingDTO());
         model.addAttribute("pets", petService.getAllPets());
         return "grooming";
@@ -62,9 +60,8 @@ public class DashboardController {
     }
 
     @GetMapping("/supplements-form")
-    public String bookSupplementsForPetForm(Model model, HttpSession session) {
-        String ownerName = (String) session.getAttribute("ownerName");
-        model.addAttribute("ownerName", ownerName);
+    public String bookSupplementsForPetForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("supplements", new SupplementsDTO());
         return "supplementsForm";
@@ -77,9 +74,8 @@ public class DashboardController {
     }
 
     @GetMapping("/orders-form")
-    public String ordersForm(Model model, HttpSession session) {
-        String ownerName = (String) session.getAttribute("ownerName");
-        model.addAttribute("ownerName", ownerName);
+    public String ordersForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements());
         return "orders";
     }

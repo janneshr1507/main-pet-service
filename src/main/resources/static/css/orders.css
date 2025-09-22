@@ -1,14 +1,15 @@
 /* ==========================
-   Base Layout
+   Base Layout & Typography
 ========================== */
 body {
     margin: 0;
+    padding: 40px;
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background: linear-gradient(135deg, #667eea, #764ba2);
     color: #fff;
     min-height: 100vh;
-    padding: 40px;
     box-sizing: border-box;
+    position: relative;
 }
 
 /* ==========================
@@ -28,7 +29,7 @@ body {
 ========================== */
 h1 {
     text-align: center;
-    margin-bottom: 30px;
+    margin-bottom: 20px;
     font-size: 2rem;
 }
 
@@ -44,6 +45,7 @@ h1 {
     border-radius: 20px;
     font-size: 0.95rem;
     font-weight: 500;
+    color: #fff;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
 }
 
@@ -57,13 +59,14 @@ h1 {
     color: #333;
     border-radius: 8px;
     overflow: hidden;
+    margin-top: 30px;
 }
 
 .orders-table th,
 .orders-table td {
     padding: 12px 16px;
-    text-align: left;
     font-size: 1rem;
+    text-align: left;
     border-bottom: 1px solid #ccc;
 }
 
@@ -86,7 +89,7 @@ h1 {
     color: #764ba2;
     padding: 12px 20px;
     border-radius: 6px;
-    font-weight: bold;
+    font-weight: 600;
     text-decoration: none;
     transition: all 0.3s ease;
 }

@@ -24,21 +24,6 @@ public class LoginController {
     @GetMapping("/login-form")
     public String loginPage(Model model) {
         model.addAttribute("login", new LoginDTO());
-        return "login";
-    }
-
-    @PostMapping("/validate-login")
-    public String validateCredentials(@ModelAttribute("login") LoginDTO loginDTO, HttpSession session, Model model) {
-        if(loginDTO.getEmail().equals("jannesh@gmail.com") && loginDTO.getPassword().equals("sarasu10")) {
-            model.addAttribute("ownerName", "Jannesh Rao");
-            session.setAttribute("ownerName", "Jannesh Rao");
-            List<Pet> pets = petService.getAllPets();
-            model.addAttribute("pets", pets);
-            List<GroomingDTO> groomingSchedules = groomingService.getAllGroomingSchedules();
-            model.addAttribute("groomingSchedules", groomingSchedules);
-            return "/dashboard";
-        } else {
-            return "redirect:/login-form";
-        }
+        return "loginPage";
     }
 }

@@ -5,9 +5,11 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 @Entity
 @Getter @Setter
+@ToString
 public class Owner {
     @Id
     @GeneratedValue
@@ -16,4 +18,5 @@ public class Owner {
     private String email;
     private String contact;
     private String password;
+    private String role;
 }

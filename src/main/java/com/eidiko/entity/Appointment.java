@@ -6,19 +6,16 @@ import jakarta.persistence.Id;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter @Setter
-public class Grooming {
+public class Appointment {
+
     @Id
     @GeneratedValue
     private Long id;
-    private Long petId;
-    private Long ownerId;
-    private String petName;
-    private List<String> services;
-    private String date;
-    private String time;
-    private String status;
+    private String petId;
+    private String ownerId;
+    private String dateTime;
+    private String vetId;
+    private String location;
 }

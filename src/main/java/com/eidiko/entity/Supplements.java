@@ -14,6 +14,8 @@ public class Supplements {
     @Id
     @GeneratedValue
     private Long id;
+    private Long petId;
+    private Long ownerId;
     private String petName;
     private List<String> selectedSupplements;
     private String quantity;

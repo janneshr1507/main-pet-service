@@ -1,5 +1,6 @@
 package com.eidiko.service;
 
+import com.eidiko.exception.EmailAlreadyExistsException;
 import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.OwnerDTO;
 import com.eidiko.entity.Owner;
@@ -20,11 +21,14 @@ public class OwnerService implements UserDetailsService {
     private final ModelMapper modelMapper;
     private final PasswordEncoder passwordEncoder;
 
-    public OwnerDTO saveOwner(OwnerDTO ownerDTO) {
+    public void saveOwner(OwnerDTO ownerDTO) {
         Owner owner = modelMapper.map(ownerDTO, Owner.class);
         owner.setRole("ROLE_" + ownerDTO.getRole().toUpperCase());
         owner.setPassword(passwordEncoder.encode(owner.getPassword()));
-        return modelMapper.map(ownerRepo.save(owner), OwnerDTO.class);
+        if(ownerRepo.existsByEmail(owner.getEmail())) {
+            throw new EmailAlreadyExistsException("Email already exists.");
+        }
+        modelMapper.map(ownerRepo.save(owner), OwnerDTO.class);
     }
 
     public Optional<Owner> getOwner(Long id) {

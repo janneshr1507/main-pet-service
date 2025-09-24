@@ -26,6 +26,12 @@ public class SecurityConfig {
                         .usernameParameter("email")
                         .loginProcessingUrl("/login")
                         .defaultSuccessUrl("/dashboardView", true)
+                        .permitAll())
+                .logout(logout -> logout
+                        .logoutUrl("/logout")
+                        .logoutSuccessUrl("/login-form?logout")
+                        .invalidateHttpSession(true)
+                        .deleteCookies("JSESSIONID")
                         .permitAll());
         System.out.println("SecurityFilterChain Bean Returning");
         return http.build();

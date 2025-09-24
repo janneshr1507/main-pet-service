@@ -1,6 +1,7 @@
 package com.eidiko.controller;
 
 import com.eidiko.dto.OwnerDTO;
+import com.eidiko.exception.EmailAlreadyExistsException;
 import com.eidiko.service.OwnerService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -23,8 +24,13 @@ public class RegisterController {
     }
 
     @PostMapping("/register-form")
-    private String registerOwner(@ModelAttribute("register") OwnerDTO ownerDTO) {
-        ownerService.saveOwner(ownerDTO);
+    private String registerOwner(@ModelAttribute("register") OwnerDTO ownerDTO, Model model) {
+        try {
+            ownerService.saveOwner(ownerDTO);
+        } catch (EmailAlreadyExistsException e) {
+            model.addAttribute("errorMessage", e.getMessage());
+            return "register";
+        }
         return "redirect:/login";
     }
 }

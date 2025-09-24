@@ -113,7 +113,8 @@ h1, h2 {
     box-shadow: 0 2px 6px rgba(0,0,0,0.2);
 }
 
-.add-pet-button {
+.add-pet-button,
+.logout-button {
     padding: 8px 14px;
     font-size: 0.9rem;
     font-weight: 600;
@@ -125,7 +126,8 @@ h1, h2 {
     transition: all 0.3s ease;
 }
 
-.add-pet-button:hover {
+.add-pet-button:hover,
+.logout-button:hover {
     background-color: #764ba2;
     color: #fff;
 }

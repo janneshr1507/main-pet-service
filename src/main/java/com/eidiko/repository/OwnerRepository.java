@@ -9,4 +9,5 @@ import java.util.Optional;
 @Repository
 public interface OwnerRepository extends JpaRepository<Owner, Long> {
     Owner findByEmail(String email);
+    boolean existsByEmail(String email);
 }

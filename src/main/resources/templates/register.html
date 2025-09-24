@@ -10,6 +10,7 @@
 <div class="register-container">
     <h2>Register</h2>
     <form th:action="@{/register-form}" th:object="${register}" method="POST">
+
         <div class="form-group">
             <label for="name">Name</label>
             <input type="text" id="name" th:field="*{name}" required />
@@ -18,6 +19,10 @@
         <div class="form-group">
             <label for="email">Email</label>
             <input type="email" id="email" th:field="*{email}" required />
+        </div>
+
+        <div th:if="${errorMessage}" class="error-message">
+            <p th:text="${errorMessage}"></p>
         </div>
 
         <div class="form-group">
@@ -37,7 +42,10 @@
             </select>
         </div>
 
-        <button type="submit" class="register-btn">Register</button>
+        <div class="button-group">
+            <button type="submit" class="button register-btn">Register</button>
+            <a href="/" class="button cancel">Cancel</a>
+        </div>
     </form>
 </div>
 </body>

@@ -1,9 +1,8 @@
 package com.eidiko.controller;
 
-import com.eidiko.dto.AppointmentDTO;
-import com.eidiko.entity.Appointment;
 import com.eidiko.entity.Owner;
-import com.eidiko.service.AppointmentService;
+import com.eidiko.entity.Pet;
+import com.eidiko.service.OwnerService;
 import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.PetDTO;
@@ -13,6 +12,8 @@ import com.eidiko.service.PetService;
 import com.eidiko.service.SupplementsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,10 +24,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class DashboardController {
+    private final OwnerService ownerService;
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
-    private final AppointmentService appointmentService;
+    private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping("/dashboardView")
     public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
@@ -45,7 +47,9 @@ public class DashboardController {
     }
 
     @PostMapping("/add-pet")
-    public String addPet(@ModelAttribute("pet") PetDTO petDTO, HttpSession session, Model model) {
+    public String addPet(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("pet") PetDTO petDTO, Model model) {
+        //log.debug("Add Pet Request Initiated");
+        petDTO.setOwnerId(ownerDetails.getId());
         petService.savePet(petDTO);
         return "redirect:/dashboardView";
     }
@@ -59,8 +63,8 @@ public class DashboardController {
     }
 
     @PostMapping("/schedule-grooming")
-    public String scheduleGroomForPet(@ModelAttribute("grooming") GroomingDTO groomingDTO, Model model, HttpSession session) {
-        groomingDTO.setStatus("Pending");
+    public String scheduleGroomForPet(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("grooming") GroomingDTO groomingDTO) {
+        groomingDTO.setOwnerId(ownerDetails.getId());
         groomingService.saveGroomingSchedule(groomingDTO);
         return "redirect:/dashboardView";
     }
@@ -74,7 +78,8 @@ public class DashboardController {
     }
 
     @PostMapping("/book-supplements")
-    public String bookSupplements(@ModelAttribute("supplements") SupplementsDTO supplementsDTO) {
+    public String bookSupplements(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("supplements") SupplementsDTO supplementsDTO) {
+        supplementsDTO.setOwnerId(ownerDetails.getId());
         supplementsService.bookSupplementsForPet(supplementsDTO);
         return "redirect:/dashboardView";
     }

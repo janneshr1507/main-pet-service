@@ -32,4 +32,8 @@ public class OwnerDetails implements UserDetails {
     public String getName() {
         return owner.getName();
     }
+
+    public Long getId() {
+        return owner.getId();
+    }
 }

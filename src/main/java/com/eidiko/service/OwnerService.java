@@ -11,6 +11,8 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @RequiredArgsConstructor
 public class OwnerService implements UserDetailsService {
@@ -23,6 +25,10 @@ public class OwnerService implements UserDetailsService {
         owner.setRole("ROLE_" + ownerDTO.getRole().toUpperCase());
         owner.setPassword(passwordEncoder.encode(owner.getPassword()));
         return modelMapper.map(ownerRepo.save(owner), OwnerDTO.class);
+    }
+
+    public Optional<Owner> getOwner(Long id) {
+        return ownerRepo.findById(id);
     }
 
     public UserDetails loadUserByUsername(String email) {

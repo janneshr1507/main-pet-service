@@ -9,6 +9,8 @@ import com.eidiko.service.PetService;
 import com.eidiko.service.SupplementsService;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,6 +24,7 @@ public class DashboardController {
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
+    //private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping("/dashboardView")
     public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
@@ -39,7 +42,9 @@ public class DashboardController {
     }
 
     @PostMapping("/add-pet")
-    public String addPet(@ModelAttribute("pet") PetDTO petDTO, HttpSession session, Model model) {
+    public String addPet(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("pet") PetDTO petDTO, Model model) {
+        //log.debug("Add Pet Request Initiated");
+        petDTO.setOwnerId(ownerDetails.getId());
         petService.savePet(petDTO);
         return "redirect:/dashboardView";
     }

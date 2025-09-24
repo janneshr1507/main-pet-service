@@ -1,5 +1,9 @@
 package com.eidiko.controller;
 
+import com.eidiko.dto.AppointmentDTO;
+import com.eidiko.entity.Appointment;
+import com.eidiko.entity.Owner;
+import com.eidiko.service.AppointmentService;
 import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.PetDTO;
@@ -22,12 +26,14 @@ public class DashboardController {
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
+    private final AppointmentService appointmentService;
 
     @GetMapping("/dashboardView")
     public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("groomingSchedules", groomingService.getAllGroomingSchedules());
+        model.addAttribute("doctorAppointments", appointmentService.getAllAppointments());
         return "dashboard";
     }
 
@@ -78,5 +84,20 @@ public class DashboardController {
         model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements());
         return "orders";
+    }
+
+    @GetMapping("/book-appointment")
+    public String bookAppointmentForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
+        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("appointment", new AppointmentDTO());
+        return "appointment";
+    }
+
+    @PostMapping("book-appointment")
+    public String bookAppointment(@AuthenticationPrincipal OwnerDetails ownerDetails, AppointmentDTO appointmentDTO, Model model) {
+        appointmentDTO.setStatus("Pending");
+        appointmentService.saveAppointment(appointmentDTO);
+        return "redirect:/dashboardView";
     }
 }

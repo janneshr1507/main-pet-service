@@ -13,9 +13,9 @@ public class Appointment {
     @Id
     @GeneratedValue
     private Long id;
-    private String petId;
-    private String ownerId;
-    private String dateTime;
-    private String vetId;
+    private String petName;
+    private String date;
+    private String time;
     private String location;
+    private String status;
 }

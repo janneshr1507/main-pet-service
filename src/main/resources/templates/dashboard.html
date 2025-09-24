@@ -23,7 +23,7 @@
     <div class="button-group">
         <button class="button" onclick="window.location.href='/grooming-form'">Grooming</button>
         <button class="button" onclick="window.location.href='/supplements-form'">Supplements</button>
-        <button class="button" onclick="window.location.href='/bookAppointment'">Book Doctor Appointment</button>
+        <button class="button" onclick="window.location.href='/book-appointment'">Book Doctor Appointment</button>
         <button class="button" onclick="window.location.href='/orders-form'">Orders</button>
     </div>
 
@@ -86,6 +86,36 @@
         </tr>
         </tbody>
     </table>
+
+    <h2>Upcoming Doctor Appointments</h2>
+    <table class="grooming-table">
+        <thead>
+        <tr>
+            <th>Pet Name</th>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Location</th>
+            <th>Doctor Name</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="appointment : ${doctorAppointments}">
+            <td th:text="${appointment.petName}">Pet Name</td>
+            <td th:text="${appointment.date}">Date</td>
+            <td th:text="${appointment.time}">Time</td>
+            <td th:text="${appointment.location}">Location</td>
+            <td>Dr.Gopinath Kumar</td>
+            <td>
+                <span th:text="${appointment.status}"
+                      th:classappend="${appointment.status != null and appointment.status.equalsIgnoreCase('pending')} ? 'status-badge pending' : 'status-badge'">
+                    Status
+                </span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
 </div>
 </body>
 </html>

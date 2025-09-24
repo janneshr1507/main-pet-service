@@ -3,14 +3,12 @@ package com.eidiko.entity;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-import lombok.ToString;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 @Getter @Setter
-@ToString
 public class Pet {
     @Id
     @GeneratedValue
@@ -30,4 +28,7 @@ public class Pet {
 
     @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Grooming> groomings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Supplements> supplements = new ArrayList<>();
 }

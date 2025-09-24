@@ -10,7 +10,6 @@ import java.util.List;
 
 @Entity
 @Getter @Setter
-@ToString
 public class Owner {
     @Id
     @GeneratedValue
@@ -26,4 +25,7 @@ public class Owner {
 
     @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Grooming> groomings = new ArrayList<>();
+
+    @OneToMany(mappedBy = "owner", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Supplements> supplements = new ArrayList<>();
 }

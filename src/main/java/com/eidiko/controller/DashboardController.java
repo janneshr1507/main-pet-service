@@ -28,7 +28,7 @@ public class DashboardController {
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
-    //private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
+    private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping("/dashboardView")
     public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
@@ -77,7 +77,8 @@ public class DashboardController {
     }
 
     @PostMapping("/book-supplements")
-    public String bookSupplements(@ModelAttribute("supplements") SupplementsDTO supplementsDTO) {
+    public String bookSupplements(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("supplements") SupplementsDTO supplementsDTO) {
+        supplementsDTO.setOwnerId(ownerDetails.getId());
         supplementsService.bookSupplementsForPet(supplementsDTO);
         return "redirect:/dashboardView";
     }

@@ -1,16 +1,11 @@
 package com.eidiko.controller;
 
-import com.eidiko.entity.Owner;
-import com.eidiko.entity.Pet;
-import com.eidiko.service.OwnerService;
+import com.eidiko.dto.AppointmentDTO;
+import com.eidiko.service.*;
 import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.PetDTO;
 import com.eidiko.dto.SupplementsDTO;
-import com.eidiko.service.GroomingService;
-import com.eidiko.service.PetService;
-import com.eidiko.service.SupplementsService;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,6 +23,7 @@ public class DashboardController {
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
+    private final AppointmentService appointmentService;
     private static final Logger log = LoggerFactory.getLogger(DashboardController.class);
 
     @GetMapping("/dashboardView")

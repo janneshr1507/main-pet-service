@@ -12,6 +12,7 @@ public class Pet {
     @Id
     @GeneratedValue
     private Long id;
+    private Long ownerId;
     private String name;
     private String breed;
     private String age;

@@ -35,6 +35,7 @@ public class DashboardController {
         model.addAttribute("pets", petService.getAllPets());
         model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("groomingSchedules", groomingService.getAllGroomingSchedules());
+        model.addAttribute("doctorAppointments", appointmentService.getAllAppointments());
         return "dashboard";
     }
 
@@ -88,5 +89,20 @@ public class DashboardController {
         model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements());
         return "orders";
+    }
+
+    @GetMapping("/book-appointment")
+    public String bookAppointmentForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
+        model.addAttribute("ownerName", ownerDetails.getName());
+        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("appointment", new AppointmentDTO());
+        return "appointment";
+    }
+
+    @PostMapping("book-appointment")
+    public String bookAppointment(@AuthenticationPrincipal OwnerDetails ownerDetails, AppointmentDTO appointmentDTO, Model model) {
+        appointmentDTO.setStatus("Pending");
+        appointmentService.saveAppointment(appointmentDTO);
+        return "redirect:/dashboardView";
     }
 }

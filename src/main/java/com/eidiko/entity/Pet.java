@@ -18,7 +18,6 @@ public class Pet {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
-    @Column(unique = true)
     private String name;
 
     private String breed;

@@ -20,7 +20,7 @@ public class Grooming {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
-
+  
     private List<String> services;
     private String date;
     private String time;

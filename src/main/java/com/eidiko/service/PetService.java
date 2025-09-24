@@ -9,6 +9,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -27,5 +28,13 @@ public class PetService {
 
     public List<Pet> getAllPets() {
         return petRepo.findAll();
+    }
+
+    public Pet getByName(String name) {
+        return petRepo.findByName(name);
+    }
+
+    public Optional<Pet> getById(Long id) {
+        return petRepo.findById(id);
     }
 }

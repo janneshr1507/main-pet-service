@@ -1,5 +1,8 @@
 package com.eidiko.controller;
 
+import com.eidiko.entity.Owner;
+import com.eidiko.entity.Pet;
+import com.eidiko.service.OwnerService;
 import com.eidiko.util.OwnerDetails;
 import com.eidiko.dto.GroomingDTO;
 import com.eidiko.dto.PetDTO;
@@ -21,6 +24,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 @Controller
 @RequiredArgsConstructor
 public class DashboardController {
+    private final OwnerService ownerService;
     private final PetService petService;
     private final GroomingService groomingService;
     private final SupplementsService supplementsService;
@@ -58,8 +62,8 @@ public class DashboardController {
     }
 
     @PostMapping("/schedule-grooming")
-    public String scheduleGroomForPet(@ModelAttribute("grooming") GroomingDTO groomingDTO, Model model, HttpSession session) {
-        groomingDTO.setStatus("Pending");
+    public String scheduleGroomForPet(@AuthenticationPrincipal OwnerDetails ownerDetails, @ModelAttribute("grooming") GroomingDTO groomingDTO) {
+        groomingDTO.setOwnerId(ownerDetails.getId());
         groomingService.saveGroomingSchedule(groomingDTO);
         return "redirect:/dashboardView";
     }

@@ -5,6 +5,9 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 @Getter @Setter
 @ToString
@@ -17,9 +20,14 @@ public class Pet {
     @JoinColumn(name = "owner_id", nullable = false)
     private Owner owner;
 
+    @Column(unique = true)
     private String name;
+
     private String breed;
     private String age;
     private String gender;
     private String weight;
+
+    @OneToMany(mappedBy = "pet", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<Grooming> groomings = new ArrayList<>();
 }

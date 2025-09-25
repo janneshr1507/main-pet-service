@@ -37,8 +37,8 @@ public class SupplementsService {
         modelMapper.map(supplementsRepo.save(supplements), SupplementsDTO.class);
     }
 
-    public List<SupplementsDTO> getAllOrderedSupplements() {
-        List<Supplements> supplements = supplementsRepo.findAll();
+    public List<SupplementsDTO> getAllOrderedSupplements(long ownerId) {
+        List<Supplements> supplements = supplementsRepo.findAllByOwnerId(ownerId);
         List<SupplementsDTO> supplementsDTOS = new ArrayList<>();
         for(int i= 0; i< supplements.size(); i++) {
             Supplements supplement = supplements.get(i);

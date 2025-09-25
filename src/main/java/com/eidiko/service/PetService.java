@@ -26,8 +26,8 @@ public class PetService {
         return modelMapper.map(petRepo.save(newPet), PetDTO.class);
     }
 
-    public List<Pet> getAllPets() {
-        return petRepo.findAll();
+    public List<Pet> getAllPets(Long ownerId) {
+        return petRepo.findAllByOwnerId(ownerId);
     }
 
     public Pet getByName(String name) {

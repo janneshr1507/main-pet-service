@@ -32,8 +32,8 @@ public class GroomingService {
         modelMapper.map(groomingRepo.save(grooming), GroomingDTO.class);
     }
 
-    public List<GroomingDTO> getAllGroomingSchedules() {
-        List<Grooming> groomingScheduleList = groomingRepo.findAll();
+    public List<GroomingDTO> getAllGroomingSchedules(Long ownerId) {
+        List<Grooming> groomingScheduleList = groomingRepo.findAllByOwnerId(ownerId);
         List<GroomingDTO> groomingDTOScheduleList = new ArrayList<>();
         for(int i=0; i<groomingScheduleList.size(); i++) {
             GroomingDTO groomingDTO = modelMapper.map(groomingScheduleList.get(i), GroomingDTO.class);

@@ -13,11 +13,11 @@
     <form th:action="@{/book-appointment}" th:object="${appointment}" method="post">
 
         <div class="form-group">
-            <label for="petName">Pet Name</label>
-            <select id="petName" th:field="*{petName}" required>
+            <label for="petId">Pet Name</label>
+            <select id="petId" th:field="*{petId}" required>
                 <option value="">Select a Pet</option>
                 <option th:each="pet : ${pets}"
-                        th:value="${pet.name}"
+                        th:value="${pet.id}"
                         th:text="${pet.name}">
                 </option>
             </select>

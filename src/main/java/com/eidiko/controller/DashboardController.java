@@ -28,10 +28,10 @@ public class DashboardController {
 
     @GetMapping("/dashboardView")
     public String dashboardView(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
-        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pets", petService.getAllPets(ownerDetails.getId()));
         model.addAttribute("ownerName", ownerDetails.getName());
-        model.addAttribute("groomingSchedules", groomingService.getAllGroomingSchedules());
-        model.addAttribute("doctorAppointments", appointmentService.getAllAppointments());
+        model.addAttribute("groomingSchedules", groomingService.getAllGroomingSchedules(ownerDetails.getId()));
+        model.addAttribute("doctorAppointments", appointmentService.getAllAppointments(ownerDetails.getId()));
         return "dashboard";
     }
 
@@ -54,7 +54,7 @@ public class DashboardController {
     public String grommingForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("ownerName", ownerDetails.getName());
         model.addAttribute("grooming", new GroomingDTO());
-        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pets", petService.getAllPets(ownerDetails.getId()));
         return "grooming";
     }
 
@@ -68,7 +68,7 @@ public class DashboardController {
     @GetMapping("/supplements-form")
     public String bookSupplementsForPetForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("ownerName", ownerDetails.getName());
-        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pets", petService.getAllPets(ownerDetails.getId()));
         model.addAttribute("supplements", new SupplementsDTO());
         return "supplementsForm";
     }
@@ -83,21 +83,21 @@ public class DashboardController {
     @GetMapping("/orders-form")
     public String ordersForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("ownerName", ownerDetails.getName());
-        model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements());
+        model.addAttribute("supplementsList", supplementsService.getAllOrderedSupplements(ownerDetails.getId()));
         return "orders";
     }
 
     @GetMapping("/book-appointment")
     public String bookAppointmentForm(@AuthenticationPrincipal OwnerDetails ownerDetails, Model model) {
         model.addAttribute("ownerName", ownerDetails.getName());
-        model.addAttribute("pets", petService.getAllPets());
+        model.addAttribute("pets", petService.getAllPets(ownerDetails.getId()));
         model.addAttribute("appointment", new AppointmentDTO());
         return "appointment";
     }
 
     @PostMapping("book-appointment")
     public String bookAppointment(@AuthenticationPrincipal OwnerDetails ownerDetails, AppointmentDTO appointmentDTO, Model model) {
-        appointmentDTO.setStatus("Pending");
+        appointmentDTO.setOwnerId(ownerDetails.getId());
         appointmentService.saveAppointment(appointmentDTO);
         return "redirect:/dashboardView";
     }
